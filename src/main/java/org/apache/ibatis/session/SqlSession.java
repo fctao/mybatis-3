@@ -27,10 +27,36 @@ import org.apache.ibatis.executor.BatchResult;
  * The primary Java interface for working with MyBatis.
  * Through this interface you can execute commands, get mappers and manage transactions.
  *
+ * mybatis的核心接口，主要用来做以下3件事：
+ * 1.执行sql，通过sql语句映射key查找需要执行的sql
+ * 2.获取mapper对象，执行sql的另外一种方式，通过方法查找需要执行的sql，其实就是将方法名当做映射key进行查找
+ * 3.管理事务，提交和回滚事务
+ *
+ * 疑问：
+ * 1.使用sql语句映射key查找不到sql时，会出现什么问题？
+ * 2.一个sql语句映射key绑定到多条sql时，会出现什么问题？
+ * 3.使用有参sql时，对象参数如何与sql语句中的占位符绑定？
+ * 4.使用有参sql时，如果sql语句的占位符字段在参数对象中找不到，会出现什么问题？
  * @author Clinton Begin
  */
 public interface SqlSession extends Closeable {
 
+  // 数据查询接口选项:
+  // 1.查询参数
+  // 1.1.无参查询
+  // 1.2.有参查询
+  // 2.查询数量
+  // 2.1.单条查询
+  // 2.2.多条查询
+  // 3.数量限定查询(RowBounds)
+  // 4.结果集处理
+  // 4.1.封装成List
+  // 4.2.封装成Map
+  // 4.3.封装成Cursor
+  // 4.4.使用ResultHandler处理
+  // 疑问：
+  // 1.使用单条数据查询接口返回的结果集有多条数据时，会出现什么问题？
+  // 查询单条数据，如果查询结果有多条，则会抛出TooManyResultsException
   /**
    * Retrieve a single row mapped from the statement key.
    * @param <T> the returned object type
@@ -169,6 +195,10 @@ public interface SqlSession extends Closeable {
    */
   void select(String statement, Object parameter, RowBounds rowBounds, ResultHandler handler);
 
+  // 新增数据接口选项：
+  // 1.新增数据参数
+  // 1.1.无参新增数据
+  // 1.2.有参新增数据
   /**
    * Execute an insert statement.
    * @param statement Unique identifier matching the statement to execute.
@@ -186,6 +216,10 @@ public interface SqlSession extends Closeable {
    */
   int insert(String statement, Object parameter);
 
+  // 修改数据接口选项：
+  // 1.修改数据参数
+  // 1.1.无参修改数据
+  // 1.2.有参修改数据
   /**
    * Execute an update statement. The number of rows affected will be returned.
    * @param statement Unique identifier matching the statement to execute.
@@ -201,6 +235,10 @@ public interface SqlSession extends Closeable {
    */
   int update(String statement, Object parameter);
 
+  // 删除数据接口选项：
+  // 1.删除数据参数
+  // 1.1.无参删除数据
+  // 1.2.有参删除数据
   /**
    * Execute a delete statement. The number of rows affected will be returned.
    * @param statement Unique identifier matching the statement to execute.

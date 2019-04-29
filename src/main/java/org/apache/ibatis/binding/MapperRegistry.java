@@ -30,6 +30,20 @@ import org.apache.ibatis.session.SqlSession;
  * @author Clinton Begin
  * @author Eduardo Macarron
  * @author Lasse Voss
+ *
+ * http://wiki.c2.com/?RegistryPattern
+ * Registry, a registry is a global association from keys to objects,
+ * allowing the objects to be reached from anywhere.
+ * It involves two methods: one that takes a key and an object and add objects to the registry
+ * and one that takes a key and returns the object for the key.
+ * It's similar the MultitonPattern, but doesn't restrict instances to only those in the registry.
+ *
+ * 注册表是一个从键到对象的全局关联，允许从任何地方访问对象。
+ * 它包含两个方法：
+ * 1.使用key和对象将对象添加到注册表中
+ * 2.使用key从注册表中获取对象
+ *
+ * 相当于一个全局Map对象吧，它封装了一个Map对象
  */
 public class MapperRegistry {
 

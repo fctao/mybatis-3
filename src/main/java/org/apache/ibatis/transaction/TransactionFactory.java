@@ -26,6 +26,10 @@ import org.apache.ibatis.session.TransactionIsolationLevel;
  * Creates {@link Transaction} instances.
  *
  * @author Clinton Begin
+ *
+ * 事务工厂，Mybatis 提供了两种工厂实现
+ * 1.jdbc事务工厂
+ * 2.不管理事务工厂
  */
 public interface TransactionFactory {
 

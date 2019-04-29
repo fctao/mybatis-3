@@ -21,6 +21,12 @@ import org.apache.ibatis.transaction.TransactionFactory;
 
 /**
  * @author Clinton Begin
+ *
+ * 环境类，用于声明一个环境。
+ * MyBatis 可以配置成适应多种环境，这种机制有助于将 SQL 映射应用于多种数据库之中， 现实情况下有多种理由需要这么做。
+ * 例如，开发、测试和生产环境需要有不同的配置；或者想在具有相同 Schema 的多个生产数据库中 使用相同的 SQL 映射。有许多类似的使用场景。
+ * 不过要记住：尽管可以配置多个环境，但每个 SqlSessionFactory 实例只能选择一种环境。
+ * 所以，如果你想连接两个数据库，就需要创建两个 SqlSessionFactory 实例，每个数据库对应一个。
  */
 public final class Environment {
   private final String id;
